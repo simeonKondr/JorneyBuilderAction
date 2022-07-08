@@ -3,10 +3,73 @@
 <html lang="en">
   <head>
     <title>test</title>
+    <style type="text/css">
+        body {
+            padding: 20px;
+            margin: 0;
+        }
+
+        .step {
+            display: none;
+        }
+
+        #step1 {
+            display: block;
+        }
+
+        #overlay {	
+            position: fixed;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+            height:100%;
+            display: none;
+            background: rgba(0,0,0,0.6);
+        }
+        .cv-spinner {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;  
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px #ddd solid;
+            border-top: 4px #2e93e6 solid;
+            border-radius: 50%;
+            animation: sp-anime 0.8s infinite linear;
+        }
+        @keyframes sp-anime {
+            100% { 
+                transform: rotate(360deg); 
+            }
+        }
+        .is-hide {
+	        display:none;
+        }
+    </style>
   </head>
   <body>
-     <h3> Configuration JSON</h3>
-     <textarea id="configuration"></textarea>
+    <div id="step1" class="step" style="display: block;">
+        <form class="form-horizontal">
+            <fieldset>
+                <div class="form-group" id="message">
+                    <label class="col-md-4 control-label" for="textinput">Message</label>
+                    <div class="col-md-4">
+                        <textarea id="message" name="message" class="form-control input-md"></textarea>
+                    </div>
+                </div>
+                <div class="form-group" id="phoneNumber">
+                    <label class="col-md-4 control-label" for="textinput">Phone Number</label>
+                    <div class="col-md-4">
+                        <textarea id="message" name="message" class="form-control input-md"></textarea>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+
+     </div>
      <script src="postmonger.js"></script>
      <script src="activity.js"></script>
   </body>
