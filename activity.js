@@ -1,12 +1,46 @@
 ﻿var connection = new Postmonger.Session();
+var payload = {};
 
-connection.trigger('ready');
+$(window).ready(onRender);
 
-connection.on('initActivity', function(data) {
-    document.getElementById('configuration').value = JSON.stringify(data, null, 2);
-})
+connection.on('initActivity', initialize);
+connection.on('clickedNext', save);
 
-connection.on('clickedNext', function(){
-    var configuration = JSON.parse(document.getElementById('configuration').value);
-    connection.trigger('updateActivity', configuration);
-});
+function onRender() {
+    connection.trigger('ready');
+}
+
+function initialize(data) {
+    if (data) {
+        payload = data;
+    }
+
+    console.log("Data", data);
+
+    var hasInArguments = Boolean(
+        payload['arguments'] &&
+        payload['arguments'].execute &&
+        payload['arguments'].execute.inArguments &&
+        payload['arguments'].execute.inArguments.length > 0
+    );
+
+    var inArguments = hasInArguments ? payload['arguments'].execute.inArguments : {};
+
+    if (inArguments.length > 0) {
+        var values = inArguments[inArguments.length - 1];
+        $("textarea#message").val(values.message);
+        $("input#phoneNumber").val(values.phoneNumber);
+    }
+}
+
+function save() {
+    var formData = {};
+
+    formData.message = $("textarea#message").val();
+    formData.phoneNumber = $("input#phoneNumber").val();
+    payload['arguments'].execute.inArguments.push(formData);
+
+    payload['metaData'].isConfigured = true;
+
+    connection.trigger('updateActivity', payload);
+}

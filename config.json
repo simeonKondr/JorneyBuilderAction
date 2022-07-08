@@ -15,14 +15,11 @@
     "execute": {
       "inArguments": [
         {
-          "message": "message"
-        },
-        {
+          "message": "message",
           "phoneNumber": ""
         }
       ],
-      "outArguments": [
-      ],
+      "outArguments": [],
       "url": "https://eo2ad706sxfh5xm.m.pipedream.net"
     }
   },
@@ -47,9 +44,7 @@
               "dataType": "Phone",
               "isNullable": false,
               "direction": "in"
-            }
-          },
-          {
+            },
             "message": {
               "dataType": "String",
               "isNullable": false,
