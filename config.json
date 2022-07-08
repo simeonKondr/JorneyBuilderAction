@@ -20,12 +20,12 @@
         }
       ],
       "outArguments": [],
-      "url": "https://eo2ad706sxfh5xm.m.pipedream.net"
+      "url": "https://eo2ad706sxfh5xm.m.pipedream.net/send"
     }
   },
   "configurationArguments": {
     "publish": {
-      "url": "https://eo2ad706sxfh5xm.m.pipedream.net"
+      "url": "https://eo2ad706sxfh5xm.m.pipedream.net/publish"
     }
   },
   "userInterfaces": {
@@ -41,12 +41,12 @@
         "inArguments": [
           {
             "phoneNumber": {
-              "dataType": "Phone",
+              "dataType": "text",
               "isNullable": false,
               "direction": "in"
             },
             "message": {
-              "dataType": "String",
+              "dataType": "text",
               "isNullable": false,
               "direction": "in"
             }
