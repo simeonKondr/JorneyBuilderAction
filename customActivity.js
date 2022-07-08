@@ -56,6 +56,7 @@ define(["postmonger"], function (Postmonger) {
       payload = data;
     }
 
+    
     var message;
     var hasInArguments = Boolean(
       payload["arguments"] &&
