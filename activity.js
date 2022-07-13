@@ -15,7 +15,6 @@ function initialize(data) {
         payload = data;
     }
 
-    console.log("Data", data);
 
     var hasInArguments = Boolean(
         payload['arguments'] &&
@@ -31,6 +30,7 @@ function initialize(data) {
         $("textarea#message").val(values.message);
         $("input#phoneNumber").val(values.phoneNumber);
     }
+    console.log("Data", data);
 }
 
 function save() {
