@@ -14,10 +14,6 @@
   "arguments": {
     "execute": {
       "inArguments": [
-        {
-          "message": "message",
-          "phoneNumber": ""
-        }
       ],
       "outArguments": [],
       "url": "https://end2s2sse3ylv.x.pipedream.net/send"
