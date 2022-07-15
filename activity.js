@@ -39,15 +39,19 @@ function initialize(data) {
 }
 
 function save() {
-    var formData = {};
+    try {
+        var formData = {};
 
-    formData.message = $("textarea#message").val();
-    formData.phoneNumber = $("input#phoneNumber").val();
-    formData.login = $("input#login").val();
-    formData.password = $("input#password").val();
-    payload['arguments'].execute.inArguments.push(formData);
+        formData.message = $("textarea#message").val();
+        formData.phoneNumber = $("input#phoneNumber").val();
+        formData.login = $("input#login").val();
+        formData.password = $("input#password").val();
+        payload['arguments'].execute.inArguments.push(formData);
 
-    payload['metaData'].isConfigured = true;
-
+        payload['metaData'].isConfigured = true;
+    } catch (error) {
+        console.error(error);
+    }
+    console.log("Data ", JSON.stringify(payload));
     connection.trigger('updateActivity', payload);
 }
