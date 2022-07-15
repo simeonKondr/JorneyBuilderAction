@@ -27,8 +27,8 @@
   },
   "userInterfaces": {
     "configModal": {
-      "height": 200,
-      "width": 300,
+      "height": 300,
+      "width": 400,
       "fullscreen": true
     }
   },
@@ -43,6 +43,16 @@
               "direction": "in"
             },
             "message": {
+              "dataType": "text",
+              "isNullable": false,
+              "direction": "in"
+            }, 
+            "login": {
+              "dataType": "text",
+              "isNullable": false,
+              "direction": "in"
+            },
+            "password": {
               "dataType": "text",
               "isNullable": false,
               "direction": "in"

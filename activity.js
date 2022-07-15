@@ -29,6 +29,8 @@ function initialize(data) {
         var values = inArguments[inArguments.length - 1];
         $("textarea#message").val(values.message);
         $("input#phoneNumber").val(values.phoneNumber);
+        $("input#login").val(values.login);
+        $("input#password").val(values.password);
     }
     console.log("Data", data);
 }
@@ -38,6 +40,8 @@ function save() {
 
     formData.message = $("textarea#message").val();
     formData.phoneNumber = $("input#phoneNumber").val();
+    formData.login = $("input#login").val();
+    formData.password = $("input#password").val();
     payload['arguments'].execute.inArguments.push(formData);
 
     payload['metaData'].isConfigured = true;
