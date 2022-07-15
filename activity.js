@@ -24,13 +24,16 @@ function initialize(data) {
     );
 
     var inArguments = hasInArguments ? payload['arguments'].execute.inArguments : {};
-
-    if (inArguments.length > 0) {
-        var values = inArguments[inArguments.length - 1];
-        $("textarea#message").val(values.message);
-        $("input#phoneNumber").val(values.phoneNumber);
-        $("input#login").val(values.login);
-        $("input#password").val(values.password);
+    try {
+        if (inArguments.length > 0) {
+            var values = inArguments[inArguments.length - 1];
+            $("textarea#message").val(values.message);
+            $("input#phoneNumber").val(values.phoneNumber);
+            $("input#login").val(values.login);
+            $("input#password").val(values.password);
+        }
+    } catch (error) {
+        console.error(error);
     }
     console.log("Data", data);
 }
