@@ -22,13 +22,22 @@
   },
   "configurationArguments": {
     "publish": {
-      "url": "https://end2s2sse3ylv.x.pipedream.net/publish"
+      "url": "https://end2s2sse3ylv.x.pipedream.net/publish",
+      "body": "",
+      "header": "",
+      "useJwt": true
     },
     "save": {
-			"url": "https://end2s2sse3ylv.x.pipedream.net/save"
+			"url": "https://end2s2sse3ylv.x.pipedream.net/save",
+      "body": "",
+      "header": "",
+      "useJwt": true
 		},
     "validate": {
-			"url": "https://end2s2sse3ylv.x.pipedream.net/publish"
+			"url": "https://end2s2sse3ylv.x.pipedream.net/publish",
+      "body": "",
+      "header": "",
+      "useJwt": true
 		}
   },
   "userInterfaces": {
