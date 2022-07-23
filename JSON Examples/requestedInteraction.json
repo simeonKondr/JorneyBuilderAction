@@ -1,35 +1,89 @@
 {
-    "name": "Integration Test",
-    "definitionType": "Multistep",
-    "channel": "",
-    "description": "",
+    "id": "67159c3d-9e6c-48d1-a5d5-054825b9f395",
     "version": 1,
+    "name": "Integration Test",
+    "description": "",
     "workflowApiVersion": 1,
     "entryMode": "MultipleEntries",
     "activities": [
       {
-        "type": "REST",
-        "key": "REST-2",
+        "key": "REST-1",
         "name": "",
+        "description": "",
+        "type": "REST",
         "outcomes": [
           {
+            "key": "3748633b-e28a-4e68-86f9-d5012f695d64",
             "next": "WAITBYDURATION-1",
+            "arguments": {
+              
+            },
             "metaData": {
               "invalid": false
             }
           }
         ],
-        "configurationArguments": {
-          "applicationExtensionKey": "8fb2c889-cde4-4025-9557-6e3b5e89e207"
+        "schema": {
+          "arguments": {
+            "execute": {
+              "inArguments": [
+                {
+                  "phoneNumber": {
+                    "dataType": "text",
+                    "isNullable": false,
+                    "direction": "In",
+                    "readOnly": false,
+                    "access": "Hidden"
+                  },
+                  "message": {
+                    "dataType": "text",
+                    "isNullable": false,
+                    "direction": "In",
+                    "readOnly": false,
+                    "access": "Hidden"
+                  }
+                }
+              ],
+              "outArguments": [
+                
+              ]
+            }
+          }
         },
         "metaData": {
-          "isConfigured": false
+          "icon": "https://studyprojecttest.herokuapp.com/icon.png",
+          "category": "custom",
+          "iconSmall": null,
+          "statsContactIcon": null,
+          "original_icon": "icon.png",
+          "isConfigured": true
+        },
+        "arguments": {
+          "execute": {
+            "inArguments": [
+              {
+                "message": "$(\"textarea#message\").val()",
+                "phoneNumber": "$(\"input#phoneNumber\").val()"
+              }
+            ],
+            "outArguments": [
+              
+            ],
+            "url": "https://end2s2sse3ylv.x.pipedream.net/send"
+          }
+        },
+        "configurationArguments": {
+          "publish": {
+            "url": "https://end2s2sse3ylv.x.pipedream.net/publish"
+          },
+          "applicationExtensionKey": "8fb2c889-cde4-4025-9557-6e3b5e89e207"
         }
       },
       {
-        "type": "WAIT",
         "key": "WAITBYDURATION-1",
         "name": "1 day",
+        "description": "",
+        "type": "WAIT",
         "outcomes": [
           {
             "key": "339d7cc6-3a8b-4aeb-82ac-eff2bd9e4475",
@@ -42,7 +96,6 @@
             "next": null
           }
         ],
-        "description": "",
         "schema": {
           "arguments": {
             "endDate": {
@@ -121,19 +174,17 @@
     "metaData": {
       "dataSource": "ContactsModel"
     },
-    "id": "67159c3d-9e6c-48d1-a5d5-054825b9f395",
     "key": "3f99e841-8ef9-0520-0ace-ad05ed58ff78",
-    "highThroughputSending": {
-      
-    },
     "createdDate": "2022-07-23T20:22:44.0000Z",
-    "modifiedDate": "2022-07-23T20:22:44.0000Z",
+    "modifiedDate": "2022-07-23T20:47:34.0000Z",
     "goals": [
       
     ],
     "exits": [
       
     ],
+    "definitionType": "Multistep",
+    "channel": "",
     "executionMode": "Production",
     "categoryId": 10229,
     "definitionId": "67159c3d-9e6c-48d1-a5d5-054825b9f395",

@@ -1,12 +1,15 @@
 {
   "name": "",
-  "id": null,
-  "key": "REST-2",
+  "id": "d47e30c2-c463-44c1-9662-65bd38bb5f3c",
+  "key": "REST-1",
   "type": "REST",
   "arguments": {
     "execute": {
       "inArguments": [
-        
+        {
+          "message": "$(\"textarea#message\").val()",
+          "phoneNumber": "$(\"input#phoneNumber\").val()"
+        }
       ],
       "outArguments": [
         
@@ -17,15 +20,15 @@
   "configurationArguments": {
     "publish": {
       "url": "https://end2s2sse3ylv.x.pipedream.net/publish"
-    },
-    "applicationExtensionKey": "8fb2c889-cde4-4025-9557-6e3b5e89e207"
+    }
   },
   "metaData": {
     "icon": "https://studyprojecttest.herokuapp.com/icon.png",
     "category": "custom",
     "iconSmall": null,
     "statsContactIcon": null,
-    "original_icon": "icon.png"
+    "original_icon": "icon.png",
+    "isConfigured": true
   },
   "schema": {
     "arguments": {
@@ -35,12 +38,16 @@
             "phoneNumber": {
               "dataType": "text",
               "isNullable": false,
-              "direction": "in"
+              "direction": "In",
+              "readOnly": false,
+              "access": "Hidden"
             },
             "message": {
               "dataType": "text",
               "isNullable": false,
-              "direction": "in"
+              "direction": "In",
+              "readOnly": false,
+              "access": "Hidden"
             }
           }
         ],
@@ -53,7 +60,11 @@
   "editable": true,
   "outcomes": [
     {
+      "key": "3748633b-e28a-4e68-86f9-d5012f695d64",
       "next": "WAITBYDURATION-1",
+      "arguments": {
+        
+      },
       "metaData": {
         "invalid": false
       }
