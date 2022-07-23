@@ -1,5 +1,5 @@
 {
-  "Name": "testName",
+  "name": "My Rest Activity",
   "workflowApiVersion": "1.1",
   "metaData": {
     "icon": "icon.png",
