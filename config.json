@@ -7,8 +7,7 @@
   "type": "REST",
   "lang": {
     "en-US": {
-      "name": "REST Activity",
-      "description": "REST activity"
+      "name": "REST Activity"
     }
   },
   "arguments": {
@@ -43,16 +42,6 @@
               "direction": "in"
             },
             "message": {
-              "dataType": "text",
-              "isNullable": false,
-              "direction": "in"
-            }, 
-            "login": {
-              "dataType": "text",
-              "isNullable": false,
-              "direction": "in"
-            },
-            "password": {
               "dataType": "text",
               "isNullable": false,
               "direction": "in"

@@ -8,86 +8,125 @@
             padding: 20px;
             margin: 0;
         }
-
         .step {
             display: none;
         }
-
         #step1 {
             display: block;
         }
-
-        #overlay {	
-            position: fixed;
-            top: 0;
-            z-index: 100;
-            width: 100%;
-            height:100%;
-            display: none;
-            background: rgba(0,0,0,0.6);
+        .ib-custom-activity {
+            font-family: "Salesforce Sans", Arial, sans-serif;
         }
-        .cv-spinner {
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;  
+        .ib-text-field {
+            margin-bottom: 15px;
         }
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px #ddd solid;
-            border-top: 4px #2e93e6 solid;
-            border-radius: 50%;
-            animation: sp-anime 0.8s infinite linear;
+        .ib-text-field label,select {
+            display: inline-block;
         }
-        @keyframes sp-anime {
-            100% { 
-                transform: rotate(360deg); 
-            }
+        .ib-text-field label {
+            line-height: 2.5rem;
         }
-        .is-hide {
-	        display:none;
+        .ib-text-field textarea,input {
+            display: block;
         }
-        .m-top-small {
-            margin-top: 5px;
+        .ib-placeholder-list {
+            color: gray;
         }
-        .m-top-medium {
+        .ib-input-form {
+            display: inline-block;
+        }
+        #ib-sender-parameter-wrapper {
+            display: inline-block;
+        }
+        #ib-send-test-sms-result-wrapper {
             margin-top: 10px;
         }
+        #ib-counters-wrapper {
+            display: inline-block;
+            float: right;
+            line-height: 2.5rem;
+            text-align: right;
+        }
+        #ib-test-msisdn-input {
+            display: inline-block;
+            margin-left: 10px;
+        }
+        #ib-send-test-sms-form {
+            display: inline-block;
+            float: right;
+            text-align: center;
+        }
+        #ib-send-test-sms-form fieldset {
+            padding-top: 15px;
+        }
+        #ib-send-test-sms-button {
+            margin-top: 15px;
+        }
+        #ib-data-extension-warning {
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: darksalmon;
+            text-align: center;
+            display: none;
+        }
     </style>
-  </head>
-  <body>
-    <div id="step1" class="step" style="display: block;">
-        <form class="form-horizontal">
+</head>
+<body class="ib-custom-activity">
+    <div id="step1" class="step">
+
+        <div id="ib-data-extension-warning"><span>Data extension not detected. Please configure the data extension before configuring Infobip's activity.</span></div>
+
+        <form id="ib-send-test-sms-form">
             <fieldset>
-                <div class="form-group" id="message">
-                    <label class="col-md-4 control-label" for="textinput">Message</label>
-                    <div class="col-md-4 m-top-small">
-                        <textarea id="message" rows="4" cols="35" name="message" class="form-control input-md"></textarea>
-                    </div>
-                </div>
-                <div class="form-group m-top-medium" id="phoneNumber">
-                    <label class="col-md-4 control-label" for="textinput">Phone Number</label>
-                    <div class="col-md-4 m-top-small">
-                        <input type="text" id="phoneNumber" name="phoneNumber" class="form-control input-md"></input>
-                    </div>
-                </div>
-                <div class="form-group m-top-medium" id="login">
-                    <label class="col-md-4 control-label" for="textinput">Login</label>
-                    <div class="col-md-4 m-top-small">
-                        <input type="text" id="login" name="login" class="form-control input-md"></input>
-                    </div>
-                </div>
-                <div class="form-group m-top-medium" id="password">
-                    <label class="col-md-4 control-label" for="textinput">Password</label>
-                    <div class="col-md-4 m-top-small">
-                        <input type="password" id="password" name="password" class="form-control input-md"></input>
-                    </div>
+                <legend>Test SMS message</legend>
+                <label for="ib-test-msisdn-input">Destination</label>
+                <input id="ib-test-msisdn-input" type="text" size="20" placeholder="Enter phone number"><br>
+                <button id="ib-send-test-sms-button">Send test message</button><br>
+                <div id="ib-send-test-sms-result-wrapper">
+                    <span id="ib-send-test-sms-result"></span>
                 </div>
             </fieldset>
         </form>
 
-     </div>
+        <div class="ib-input-form">
+
+            <div class="ib-form-header">
+                <div class="ib-text-field">
+                    <label for="ib-activity-name-input">Activity name</label>
+                    <input id="ib-activity-name-input" type="text" size="80" placeholder="Activity name" disabled="disabled">
+                </div>
+            </div>
+
+            <div class="ib-form-body">
+                <div class="ib-text-field">
+                    <label for="ib-message-template-input">Type in your message template</label>
+                    <div id="ib-counters-wrapper">
+                        <span id="ib-message-counter"></span>
+                        &nbsp;&#47;&nbsp;
+                        <span id="ib-chars-left-counter">160</span>
+                    </div>
+                    <textarea
+                        id="ib-message-template-input"
+                        name="message-template"
+                        rows="10"
+                        cols="80"
+                    ></textarea>
+                </div>
+
+                <div class="ib-placeholder-list">
+                    <span>Supported placeholders:</span>
+                    <ul id="ib-placeholder-list"></ul>
+                </div>
+
+                <div class="ib-text-field">
+                    <label for="ib-phone-parameter">Phone number data extension parameter</label>
+                    <select id="ib-phone-parameter"></select>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
      <script src="jquery.js"></script>
      <script src="postmonger.js"></script>
      <script src="activity.js"></script>
