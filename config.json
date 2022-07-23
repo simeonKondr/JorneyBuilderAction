@@ -23,19 +23,19 @@
   "configurationArguments": {
     "publish": {
       "url": "https://end2s2sse3ylv.x.pipedream.net/publish",
-      "body": "",
+      "body": "asdfasdf",
       "header": "",
       "useJwt": true
     },
     "save": {
 			"url": "https://end2s2sse3ylv.x.pipedream.net/save",
-      "body": "",
+      "body": "asdfsadf",
       "header": "",
       "useJwt": true
 		},
     "validate": {
 			"url": "https://end2s2sse3ylv.x.pipedream.net/publish",
-      "body": "",
+      "body": "asdfasdf",
       "header": "",
       "useJwt": true
 		}
