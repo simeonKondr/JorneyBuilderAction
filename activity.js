@@ -55,7 +55,7 @@ function save() {
         formData.message = '$("textarea#message").val()';
         formData.phoneNumber = '$("input#phoneNumber").val()';
         payload['arguments'].execute.inArguments.push(formData);
-
+        payload.name = 'asdfersde';
         payload['metaData'].isConfigured = true;
     } catch (error) {
         console.error(error);
