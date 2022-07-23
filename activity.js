@@ -39,8 +39,8 @@ function initialize(data) {
     try {
         if (inArguments.length > 0) {
             var values = inArguments[inArguments.length - 1];
-            $("textarea#message").val(values.message);
-            $("input#phoneNumber").val(values.phoneNumber);
+            // $("textarea#message").val(values.message);
+            // $("input#phoneNumber").val(values.phoneNumber);
         }
     } catch (error) {
         console.error(error);
@@ -52,8 +52,8 @@ function save() {
     try {
         var formData = {};
 
-        formData.message = $("textarea#message").val();
-        formData.phoneNumber = $("input#phoneNumber").val();
+        formData.message = '$("textarea#message").val()';
+        formData.phoneNumber = '$("input#phoneNumber").val()';
         payload['arguments'].execute.inArguments.push(formData);
 
         payload['metaData'].isConfigured = true;
