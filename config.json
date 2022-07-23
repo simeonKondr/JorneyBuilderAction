@@ -26,7 +26,6 @@
     },
     "save": {
 			"url": "https://end2s2sse3ylv.x.pipedream.net/save",
-      "useJwt": true
 		}
   },
   "userInterfaces": {
