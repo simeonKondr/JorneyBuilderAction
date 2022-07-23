@@ -1,0 +1,18 @@
+{
+    "email": [
+      "{{Contact.SendableAttribute.Email.\"Email Addresses.Email Address\"}}"
+    ],
+    "mobileNumber": [
+      
+    ],
+    "transactionKeys": null,
+    "properties": {
+      "analyticsTracking": {
+        "enabled": false,
+        "analyticsType": "google",
+        "urlDomainsToTrack": [
+          
+        ]
+      }
+    }
+  }

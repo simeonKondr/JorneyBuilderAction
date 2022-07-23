@@ -1,36 +1,31 @@
 {
-  "Name": "testName",
-  "workflowApiVersion": "1.1",
-  "metaData": {
-    "icon": "icon.png",
-    "category": "custom"
-  },
+  "name": "",
+  "id": null,
+  "key": "REST-2",
   "type": "REST",
-  "lang": {
-    "en-US": {
-      "name": "REST Activity"
-    }
-  },
   "arguments": {
     "execute": {
       "inArguments": [
         
       ],
-      "outArguments": [],
+      "outArguments": [
+        
+      ],
       "url": "https://end2s2sse3ylv.x.pipedream.net/send"
     }
   },
   "configurationArguments": {
     "publish": {
       "url": "https://end2s2sse3ylv.x.pipedream.net/publish"
-    }
+    },
+    "applicationExtensionKey": "8fb2c889-cde4-4025-9557-6e3b5e89e207"
   },
-  "userInterfaces": {
-    "configModal": {
-      "height": 300,
-      "width": 400,
-      "fullscreen": true
-    }
+  "metaData": {
+    "icon": "https://studyprojecttest.herokuapp.com/icon.png",
+    "category": "custom",
+    "iconSmall": null,
+    "statsContactIcon": null,
+    "original_icon": "icon.png"
   },
   "schema": {
     "arguments": {
@@ -54,5 +49,15 @@
         ]
       }
     }
-  }
+  },
+  "editable": true,
+  "outcomes": [
+    {
+      "next": "WAITBYDURATION-1",
+      "metaData": {
+        "invalid": false
+      }
+    }
+  ],
+  "errors": null
 }

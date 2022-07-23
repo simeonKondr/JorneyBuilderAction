@@ -1,0 +1,7 @@
+{
+    "restHost": "rest.s51.exacttarget.com",
+    "stackKey": "S51",
+    "stackHost": "mc.s51.exacttarget.com",
+    "ssoUrl": "https://mc.s51.exacttarget.com/cloud/tools/SSO.aspx?env=default&legacy=1&sk=S51",
+    "fuelapiRestHost": "https://www-mc-s51.marketingcloudapis.com/"
+  }

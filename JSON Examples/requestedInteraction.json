@@ -1,0 +1,182 @@
+{
+    "name": "Integration Test",
+    "definitionType": "Multistep",
+    "channel": "",
+    "description": "",
+    "version": 1,
+    "workflowApiVersion": 1,
+    "entryMode": "MultipleEntries",
+    "activities": [
+      {
+        "type": "REST",
+        "key": "REST-2",
+        "name": "",
+        "outcomes": [
+          {
+            "next": "WAITBYDURATION-1",
+            "metaData": {
+              "invalid": false
+            }
+          }
+        ],
+        "configurationArguments": {
+          "applicationExtensionKey": "8fb2c889-cde4-4025-9557-6e3b5e89e207"
+        },
+        "metaData": {
+          "isConfigured": false
+        }
+      },
+      {
+        "type": "WAIT",
+        "key": "WAITBYDURATION-1",
+        "name": "1 day",
+        "outcomes": [
+          {
+            "key": "339d7cc6-3a8b-4aeb-82ac-eff2bd9e4475",
+            "arguments": {
+              
+            },
+            "metaData": {
+              "invalid": false
+            },
+            "next": null
+          }
+        ],
+        "description": "",
+        "schema": {
+          "arguments": {
+            "endDate": {
+              "dataType": "Date",
+              "isNullable": false,
+              "direction": "Out",
+              "readOnly": false,
+              "access": "Hidden"
+            },
+            "waitEndDateAttributeDataBound": {
+              "dataType": "Text",
+              "isNullable": true,
+              "direction": "In",
+              "readOnly": false,
+              "access": "Hidden"
+            },
+            "waitDefinitionId": {
+              "dataType": "Text",
+              "isNullable": false,
+              "direction": "In",
+              "readOnly": false,
+              "access": "Hidden"
+            },
+            "waitForEventId": {
+              "dataType": "Text",
+              "isNullable": true,
+              "direction": "In",
+              "readOnly": false,
+              "access": "Hidden"
+            },
+            "executionMode": {
+              "dataType": "Text",
+              "isNullable": false,
+              "direction": "In",
+              "readOnly": false,
+              "access": "Hidden"
+            },
+            "startActivityKey": {
+              "dataType": "Text",
+              "isNullable": true,
+              "direction": "In",
+              "readOnly": false,
+              "access": "Hidden"
+            },
+            "waitQueueId": {
+              "dataType": "LongNumber",
+              "isNullable": true,
+              "direction": "In",
+              "readOnly": false,
+              "access": "Hidden"
+            }
+          }
+        },
+        "metaData": {
+          "isConfigured": true,
+          "uiType": "WAITBYDURATION"
+        },
+        "configurationArguments": {
+          "waitDuration": 1,
+          "waitUnit": "DAYS"
+        }
+      }
+    ],
+    "notifiers": [
+      
+    ],
+    "persistenceModel_asyncStopping": {
+      
+    },
+    "persistenceModel_pausing": {
+      
+    },
+    "persistenceModel_resuming": {
+      
+    },
+    "metaData": {
+      "dataSource": "ContactsModel"
+    },
+    "id": "67159c3d-9e6c-48d1-a5d5-054825b9f395",
+    "key": "3f99e841-8ef9-0520-0ace-ad05ed58ff78",
+    "highThroughputSending": {
+      
+    },
+    "createdDate": "2022-07-23T20:22:44.0000Z",
+    "modifiedDate": "2022-07-23T20:22:44.0000Z",
+    "goals": [
+      
+    ],
+    "exits": [
+      
+    ],
+    "executionMode": "Production",
+    "categoryId": 10229,
+    "definitionId": "67159c3d-9e6c-48d1-a5d5-054825b9f395",
+    "scheduledStatus": "Draft",
+    "defaults": {
+      "email": [
+        "{{Contact.SendableAttribute.Email.\"Email Addresses.Email Address\"}}"
+      ],
+      "mobileNumber": [
+        
+      ],
+      "transactionKeys": null,
+      "properties": {
+        "analyticsTracking": {
+          "enabled": false,
+          "analyticsType": "google",
+          "urlDomainsToTrack": [
+            
+          ]
+        }
+      }
+    },
+    "triggers": [
+      {
+        "key": "TRIGGER",
+        "name": "TRIGGER",
+        "description": "",
+        "type": "EmailAudience",
+        "configurationArguments": {
+          
+        },
+        "metaData": {
+          "sourceInteractionId": "00000000-0000-0000-0000-000000000000",
+          "eventDefinitionId": "21BFF107-B4CF-4ECF-B959-73699AB89CD7",
+          "eventDefinitionKey": "DEAudience-b9103a64-efd0-e435-891f-78cb50d294ff",
+          "chainType": "none",
+          "configurationRequired": false,
+          "iconUrl": "/images/icon-data-extension.svg",
+          "title": "Data Extension",
+          "entrySourceGroupConfigUrl": "jb:///data/entry/audience/entrysourcegroupconfig.json"
+        }
+      }
+    ],
+    "transactionKeys": null,
+    "status": "DRAFT"
+  }
