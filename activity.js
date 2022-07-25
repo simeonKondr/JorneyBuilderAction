@@ -33,7 +33,7 @@ function initialize(data) {
         payload['arguments'].execute.inArguments &&
         payload['arguments'].execute.inArguments.length > 0
     );
-
+    $("input#activity-name-input").val(payload.name)
     var inArguments = hasInArguments ? payload['arguments'].execute.inArguments : {};
         if (inArguments.length > 0) {
             var values = inArguments[inArguments.length - 1];
@@ -55,7 +55,7 @@ function save() {
     formData.phoneNumber = document.getElementById("phone-parameter").value;
     payload['arguments'].execute.inArguments = [];
     payload['arguments'].execute.inArguments.push(formData);
-    payload.name = 'asdfersde';
+    payload.name = $("input#activity-name-input").val();;
     payload['metaData'].isConfigured = true;
     console.log("Data ", JSON.stringify(payload));
     connection.trigger('updateActivity', payload);

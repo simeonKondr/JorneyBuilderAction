@@ -18,7 +18,8 @@
         
       ],
       "outArguments": [],
-      "url": "https://end2s2sse3ylv.x.pipedream.net/"
+      "url": "https://end2s2sse3ylv.x.pipedream.net/",
+      "useJwt": true
     }
   },
   "configurationArguments": {
