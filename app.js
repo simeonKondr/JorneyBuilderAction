@@ -28,6 +28,7 @@ app.get('/events', (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*')
     let id = req.query.id;
     let token = req.query.token;
+    res.write('val');
     // const id = '21BFF107-B4CF-4ECF-B959-73699AB89CD7', token='eyJhbGciOiJIUzI1NiIsImtpZCI6IjQiLCJ2ZXIiOiIxIiwidHlwIjoiSldUIn0.eyJhY2Nlc3NfdG9rZW4iOiJXMkNXOUZPdkV6VEswdXp2VTQ5NHI4aHIiLCJjbGllbnRfaWQiOiJ6MDBzMGE0MHB3MzNseHAyd3oxNmRtNm0iLCJlaWQiOjUzNjAwMjA0OCwic3RhY2tfa2V5IjoiUzUxIiwicGxhdGZvcm1fdmVyc2lvbiI6MiwiY2xpZW50X3R5cGUiOiJTZXJ2ZXJUb1NlcnZlciIsInBpZCI6MTc4fQ.AWvErR9vXB53azerua4t2aWXEMhyoH1AXu-cn4ghV80._FK4h2-vlGAs3a7loA-DkdyJ585iGDTl2uCOHxta9h2qO9uw1QkgW4_57OhZpZ_PACshwICYgOMd06yPIXRF0uaRO2Q00rvTaYw-aCxLjDRAvh_wODacErr3kgJckDkbtBkByGo6my1vTVb0WRe30kd4TmJVVJqw9CiqP';
     getData(id, token).then(val => {
         console.log(val)
