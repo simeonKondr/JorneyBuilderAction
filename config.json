@@ -1,5 +1,4 @@
 {
-  "name": "My Rest Activity",
   "workflowApiVersion": "1.1",
   "metaData": {
     "icon": "icon.png",
@@ -15,24 +14,24 @@
   "arguments": {
     "execute": {
       "inArguments": [
-        
+        {
+          "message": "message",
+          "phoneNumber": ""
+        }
       ],
       "outArguments": [],
-      "url": "https://end2s2sse3ylv.x.pipedream.net/",
+      "url": "https://end2s2sse3ylv.x.pipedream.net/send"
     }
   },
   "configurationArguments": {
     "publish": {
-      "url": "https://end2s2sse3ylv.x.pipedream.net/",
-    },
-    "save": {
-			"url": "https://end2s2sse3ylv.x.pipedream.net/",
-		}
+      "url": "https://end2s2sse3ylv.x.pipedream.net/publish"
+    }
   },
   "userInterfaces": {
     "configModal": {
-      "height": 300,
-      "width": 400,
+      "height": 200,
+      "width": 300,
       "fullscreen": true
     }
   },

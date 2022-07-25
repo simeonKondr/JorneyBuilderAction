@@ -44,9 +44,9 @@ function save() {
     var formData = {};
     // formData.message = $("textarea#message-template-input").val();
     // formData.phoneNumber = document.getElementById("phone-parameter").value;
-    formData.message = "ASD";
-    formData.phoneNumber = "asd";
-    payload['arguments'].execute.inArguments.push(formData);
+    // formData.message = "ASD";
+    // formData.phoneNumber = "asd";
+    // payload['arguments'].execute.inArguments.push(formData);
     // payload.name = 'asdfersde';
     payload['metaData'].isConfigured = true;
     console.log("Data ", JSON.stringify(payload));
