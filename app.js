@@ -60,14 +60,16 @@ function getData(id, token){
 
 function getObjectNameById(id, token){
     let xml = fs.readFileSync('SOAPEnvelopes/getObjectById.xml', 'utf-8').replace(TOKEN_PARAM, token).replace(FILTER_VALUE_PARAM, id);
-    let response = makeRequest(xml);    
+    let response = makeRequest(xml);  
+    console.log('getObjectNameById: ' + response);   
     let parsedXMLBody = (new DOMParser()).parseFromString(response,"text/xml");
     return parsedXMLBody.getElementsByTagName("CustomerKey")[0].childNodes[0].nodeValue;   
 }
 
 function getFieldsSoapRequest(objectName, token){
     let xml = fs.readFileSync('SOAPEnvelopes/getObjectFields.xml', 'utf-8').replace(TOKEN_PARAM, token).replace(FILTER_VALUE_PARAM, objectName);
-    let response = makeRequest(xml);    
+    let response = makeRequest(xml);   
+    console.log('getFieldsSoapRequest: ' + response); 
     return getFields(response);
 }
 
@@ -92,6 +94,7 @@ function getEventDefinition(id, token){
             }
     }
     var res = request('GET', REST_REQUEST_URL+EVEN_DEFINITIONS_ENDPOINT + id, options);
+    console.log('Event definition get: ' + res);
     return JSON.parse(res.getBody().toString()).arguments.dataExtensionId;
 }
 

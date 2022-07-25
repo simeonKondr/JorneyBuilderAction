@@ -84,7 +84,11 @@ function sendTestSMS(){
 }
 
 function loadData(){
+    console.log(token);
+    console.log(eventDefinitionId);
     if (token && eventDefinitionId){
+        console.log(token);
+        console.log(eventDefinitionId);
         getDataExtentionsQuery = getDataExtentionsQuery.replace('@token',token).replace('@id',eventDefinitionId)
         const Http = new XMLHttpRequest();
         Http.open("GET", getDataExtentionsQuery);
