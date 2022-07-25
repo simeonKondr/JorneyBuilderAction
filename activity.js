@@ -42,10 +42,8 @@ function initialize(data) {
 
 function save() {
     var formData = {};
-    // formData.message = $("textarea#message-template-input").val();
-    // formData.phoneNumber = document.getElementById("phone-parameter").value;
-    formData.message = "ASD";
-    formData.phoneNumber = "asd";
+    formData.message = $("textarea#message-template-input").val();
+    formData.phoneNumber = document.getElementById("phone-parameter").value;
     payload['arguments'].execute.inArguments.push(formData);
     payload.name = 'asdfersde';
     payload['metaData'].isConfigured = true;
