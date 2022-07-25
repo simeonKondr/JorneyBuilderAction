@@ -1,4 +1,5 @@
 const express = require('express'); //Import the express dependency
+const request = require('sync-request');
 const jwt = require('jsonwebtoken');
 const app = express();              
 const port = process.env.PORT || 5000;                  //Save the port number where your server will be listening
@@ -24,16 +25,11 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname));
 
 app.get('/events', (req, res) => {
-    res.setHeader('Content-Type', 'text/event-stream')
+    res.setHeader('Content-Type', 'application/json;')
     res.setHeader('Access-Control-Allow-Origin', '*')
     let id = req.query.id;
     let token = req.query.token;
-    res.write('val');
-    // const id = '21BFF107-B4CF-4ECF-B959-73699AB89CD7', token='eyJhbGciOiJIUzI1NiIsImtpZCI6IjQiLCJ2ZXIiOiIxIiwidHlwIjoiSldUIn0.eyJhY2Nlc3NfdG9rZW4iOiJXMkNXOUZPdkV6VEswdXp2VTQ5NHI4aHIiLCJjbGllbnRfaWQiOiJ6MDBzMGE0MHB3MzNseHAyd3oxNmRtNm0iLCJlaWQiOjUzNjAwMjA0OCwic3RhY2tfa2V5IjoiUzUxIiwicGxhdGZvcm1fdmVyc2lvbiI6MiwiY2xpZW50X3R5cGUiOiJTZXJ2ZXJUb1NlcnZlciIsInBpZCI6MTc4fQ.AWvErR9vXB53azerua4t2aWXEMhyoH1AXu-cn4ghV80._FK4h2-vlGAs3a7loA-DkdyJ585iGDTl2uCOHxta9h2qO9uw1QkgW4_57OhZpZ_PACshwICYgOMd06yPIXRF0uaRO2Q00rvTaYw-aCxLjDRAvh_wODacErr3kgJckDkbtBkByGo6my1vTVb0WRe30kd4TmJVVJqw9CiqP';
-    getData(id, token).then(val => {
-        console.log(val)
-        res.write(val);
-    });
+    res.end(JSON.stringify(getData(id, token)));
 })
 
 app.post('/testSend', (req, res) => {
@@ -56,45 +52,47 @@ app.listen(port, () => {            //server starts listening for any attempts f
     console.log(`Now listening on port ${port}`); 
 });
 
-// getData().then(val => console.log(val));
-
 function getData(id, token){
-    return getEventDefinition(id, token).then(json => {
-        let xml = fs.readFileSync('SOAPEnvelopes/getObjectById.xml', 'utf-8').replace(TOKEN_PARAM, token).replace(FILTER_VALUE_PARAM, json.arguments.dataExtensionId);
-        return makeRequest(xml);
-    }).then(response => {
-        const { headers, body, statusCode } = response.response;
-        let parsedXMLBody = (new DOMParser()).parseFromString(body,"text/xml");
-        let objectName = parsedXMLBody.getElementsByTagName("CustomerKey")[0].childNodes[0].nodeValue;
-        let xml = fs.readFileSync('SOAPEnvelopes/getObjectFields.xml', 'utf-8').replace(TOKEN_PARAM, token).replace(FILTER_VALUE_PARAM, objectName);
-        return makeRequest(xml);
-    }).then(response => {
-        const { headers, body, statusCode } = response.response;
-        return getFields(body);
-    })
+    let dataExtensionId = getEventDefinition(id, token);
+    let objectName = getObjectNameById(dataExtensionId, token);
+    return getFieldsSoapRequest(objectName, token);
+}
+
+function getObjectNameById(id, token){
+    let xml = fs.readFileSync('SOAPEnvelopes/getObjectById.xml', 'utf-8').replace(TOKEN_PARAM, token).replace(FILTER_VALUE_PARAM, id);
+    let response = makeRequest(xml);    
+    let parsedXMLBody = (new DOMParser()).parseFromString(response,"text/xml");
+    return parsedXMLBody.getElementsByTagName("CustomerKey")[0].childNodes[0].nodeValue;   
+}
+
+function getFieldsSoapRequest(objectName, token){
+    let xml = fs.readFileSync('SOAPEnvelopes/getObjectFields.xml', 'utf-8').replace(TOKEN_PARAM, token).replace(FILTER_VALUE_PARAM, objectName);
+    let response = makeRequest(xml);    
+    return getFields(response);
 }
 
 function makeRequest(xml) {
-    const url = SOAP_REQUEST_URL;
-    const sampleHeaders = {
-    'user-agent': 'MarketingCloud',
-    'Content-Type': 'text/xml;charset=UTF-8',
-    'soapAction': 'Retrieve',
-    };
-    return soapRequest({ url: url, headers: sampleHeaders, xml: xml, timeout: 10000 });
+    var options = {
+        headers: {
+            'user-agent': 'MarketingCloud',
+            'Content-Type': 'text/xml;charset=UTF-8',
+            'soapAction': 'Retrieve',
+            },
+        body: xml
+    }
+    var res = request('POST', SOAP_REQUEST_URL, options);
+    return res.getBody().toString()
 }
 
 function getEventDefinition(id, token){
     var options = {
-        method: "GET",
         headers: {
-          "Authorization" : "Bearer "+ token,
-          "Content-Type": "application/json"
-        }
+            "Authorization" : "Bearer "+ token,
+            "Content-Type": "application/json"
+            }
     }
-    return fetch(REST_REQUEST_URL+EVEN_DEFINITIONS_ENDPOINT + id, options).then(data => {
-        return data.json();
-    }, reason => console.log(reason) )
+    var res = request('GET', REST_REQUEST_URL+EVEN_DEFINITIONS_ENDPOINT + id, options);
+    return JSON.parse(res.getBody().toString()).arguments.dataExtensionId;
 }
 
 function getFields(body){

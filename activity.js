@@ -3,6 +3,7 @@ var payload = {};
 var getDataExtentionsQuery = '/events?token=@token&id=@id';
 var selectedPhoneField;
 var token, eventDefinitionId;
+var serverEvents;
 $(window).ready(onRender);
 
 connection.on('initActivity', initialize);
@@ -85,19 +86,21 @@ function sendTestSMS(){
 function loadData(){
     if (token && eventDefinitionId){
         getDataExtentionsQuery = getDataExtentionsQuery.replace('@token',token).replace('@id',eventDefinitionId)
-        loadDataExtention();
+        const Http = new XMLHttpRequest();
+        Http.open("GET", getDataExtentionsQuery);
+        Http.send();
+        Http.onreadystatechange = (e) => {
+          console.log(Http.responseText);
+          fillFieldsData(JSON.parse(Http.responseText));
+        }
     }
 }
 
-function loadDataExtention(){
-    var serverEvents = new EventSource(getDataExtentionsQuery);
-    serverEvents.onmessage = function (event){
-        console.log(event.data);
-        fillFieldsData(event.data);
-    };
-}
-
 function fillFieldsData(data){
+    let phoneElem = document.getElementById("phone-parameter");
+    let selectElem = document.getElementById("placeholder-list");
+    phoneElem.innerHTML = '';
+    selectElem.innerHTML = '';
     data.forEach(field => {
         if (field.type === 'Phone'){
             let elemSelect = document.createElement('option');
@@ -105,11 +108,11 @@ function fillFieldsData(data){
             elemSelect.innerText = field.name;
             elemSelect.setAttribute("value", field.name);
             elemSelect.setAttribute("id", field.name);
-            document.getElementById("phone-parameter").appendChild(elemSelect);
+            phoneElem.appendChild(elemSelect);
         }
         let elemLi = document.createElement('li');
         elemLi.innerText = '%%' + field.name + '%%';
-        document.getElementById("placeholder-list").appendChild(elemLi);
+        selectElem.appendChild(elemLi);
     })
-    document.getElementById("phone-parameter").value = selectedPhoneField;
+    phoneElem.value = selectedPhoneField;
 }
