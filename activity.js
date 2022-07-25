@@ -95,9 +95,12 @@ function loadData(){
         Http.send();
         Http.onreadystatechange = (e) => {
             if (Http.responseText){
+                console.log(Http.responseText);
                 fillFieldsData(JSON.parse(Http.responseText));
+                Http.close();
             }
         }
+        
     }
 }
 
