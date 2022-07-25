@@ -43,16 +43,12 @@ function initialize(data) {
 }
 
 function save() {
-    try {
-        var formData = {};
-        formData.message = $("textarea#message-template-input").val();
-        formData.phoneNumber = document.getElementById("phone-parameter").val();
-        payload['arguments'].execute.inArguments.push(formData);
-        payload.name = 'asdfersde';
-        payload['metaData'].isConfigured = true;
-    } catch (error) {
-        console.error(error);
-    }
+    var formData = {};
+    formData.message = $("textarea#message-template-input").val();
+    formData.phoneNumber = document.getElementById("phone-parameter").val();
+    payload['arguments'].execute.inArguments.push(formData);
+    payload.name = 'asdfersde';
+    payload['metaData'].isConfigured = true;
     console.log("Data ", JSON.stringify(payload));
     connection.trigger('updateActivity', payload);
 }
@@ -60,12 +56,12 @@ function save() {
 
 function requestedTokens(data) {
     token = data.fuel2token;
-    loadData()
+    console.log('requestedTokens');
 }
 
 function requestedInteraction(data) {
     eventDefinitionId = data.triggers[0].metaData.eventDefinitionId;
-    loadData();
+    console.log('interaction');
 }
 
 function sendTestSMS(){
