@@ -33,9 +33,12 @@ app.get('/events', (req, res) => {
 })
 
 app.post('/testSend', (req, res) => {
-    let phone = req.body.phoneNumber;     
-    let message = req.body.message;
-    var token = jwt.sign(req.body, JWT_TOKEN);
+    testData = {
+        inArguments: [
+            req.body
+        ]
+    }
+    var token = jwt.sign(testData, JWT_TOKEN);
     var options = {
         method: "POST",
         body: token
