@@ -34,12 +34,6 @@
       "body": "asdfsadf",
       "header": "",
       "useJwt": true
-		},
-    "validate": {
-			"url": "https://end2s2sse3ylv.x.pipedream.net/publish",
-      "body": "asdfasdf",
-      "header": "",
-      "useJwt": true
 		}
   },
   "userInterfaces": {
