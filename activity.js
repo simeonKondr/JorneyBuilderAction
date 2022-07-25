@@ -43,8 +43,9 @@ function initialize(data) {
 
 function save() {
     var formData = {};
-    formData.message = mergeFieldPattern.replace('@field', $("textarea#message-template-input").val().replace("%",''));
+    formData.message = mergeFieldPattern.replace('@field', $("textarea#message-template-input").val().replaceAll("%",''));
     formData.phoneNumber = document.getElementById("phone-parameter").value;
+    payload['arguments'].execute.inArguments = [];
     payload['arguments'].execute.inArguments.push(formData);
     payload.name = 'asdfersde';
     payload['metaData'].isConfigured = true;
