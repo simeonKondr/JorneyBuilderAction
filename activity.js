@@ -14,6 +14,7 @@ connection.on('requestedInteraction', requestedInteraction);
 function onRender() {
     connection.trigger('requestTokens');
     connection.trigger('requestInteraction');
+    connection.trigger('ready');
 }
 
 function initialize(data) {
@@ -30,15 +31,13 @@ function initialize(data) {
     );
 
     var inArguments = hasInArguments ? payload['arguments'].execute.inArguments : {};
-    try {
         if (inArguments.length > 0) {
             var values = inArguments[inArguments.length - 1];
             $("textarea#message-template-input").val(values.message);
             selectedPhoneField = values.phoneNumber;
         }
-    } catch (error) {
         console.error(error);
-    }
+    
     console.log("Data", data);
 }
 
