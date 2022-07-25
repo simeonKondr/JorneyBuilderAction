@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:par="http://exacttarget.com/wsdl/partnerAPI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Header>
+     <fueloauth>@oauthToken</fueloauth>
+  </soapenv:Header>
+  <soapenv:Body>
+    <RetrieveRequestMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">
+         <RetrieveRequest>
+            <ObjectType>DataExtension</ObjectType>
+            <Properties>Client.ID</Properties>
+            <Properties>DataRetentionPeriod</Properties>
+            <Properties>Name</Properties>
+            <Properties>DataRetentionPeriodLength</Properties>
+            <Properties>DataRetentionPeriodUnitOfMeasure</Properties>
+            <Properties>ObjectID</Properties>
+            <Properties>CustomerKey</Properties>
+            <Filter xsi:type="SimpleFilterPart">
+               <Property>ObjectID</Property>
+               <SimpleOperator>equals</SimpleOperator>
+               <Value>@filterValue</Value>
+            </Filter>
+         </RetrieveRequest>
+      </RetrieveRequestMsg>
+  </soapenv:Body>
+</soapenv:Envelope>

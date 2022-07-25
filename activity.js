@@ -1,5 +1,6 @@
 ﻿var connection = new Postmonger.Session();
 var payload = {};
+var getDataExtentionsQuery = '/events?token=@token&id=@id';
 
 $(window).ready(onRender);
 
@@ -11,6 +12,13 @@ connection.on('requestedCulture', requestedCulture);
 connection.on('requestedInteractionDefaults', requestedInteractionDefaults);
 connection.on('requestedInteraction', requestedInteraction);
 
+// var serverEvents = new EventSource(getDataExtentionsQuery);
+// serverEvents.onmessage = function (event){
+//     console.log(event.data);
+// };
+
+sendTestSMS();
+
 
 function onRender() {
     connection.trigger('ready');
@@ -19,6 +27,7 @@ function onRender() {
     connection.trigger('requestCulture');
     connection.trigger('requestInteractionDefaults');
     connection.trigger('requestInteraction');
+    // testSoapRequest();
 
 }
 
@@ -83,4 +92,16 @@ function requestedInteractionDefaults(data) {
 
 function requestedInteraction(data) {
     console.log('*** requestedInteraction ' + JSON.stringify(data));
+}
+
+function sendTestSMS(){
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "/testSend");
+    xhr.setRequestHeader("Accept", "application/json");
+    xhr.setRequestHeader("Content-Type", "application/json");
+    let requestPayload = {
+        phoneNumber: 'phone',
+        message:'message'
+    };
+    xhr.send(JSON.stringify(requestPayload));
 }
