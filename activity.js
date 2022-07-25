@@ -1,7 +1,8 @@
 ﻿var connection = new Postmonger.Session();
 var payload = {};
 var getDataExtentionsQuery = '/events?token=@token&id=@id';
-
+var selectedPhoneField;
+var token, eventDefinitionId;
 $(window).ready(onRender);
 
 connection.on('initActivity', initialize);
@@ -12,23 +13,9 @@ connection.on('requestedCulture', requestedCulture);
 connection.on('requestedInteractionDefaults', requestedInteractionDefaults);
 connection.on('requestedInteraction', requestedInteraction);
 
-// var serverEvents = new EventSource(getDataExtentionsQuery);
-// serverEvents.onmessage = function (event){
-//     console.log(event.data);
-// };
-
-sendTestSMS();
-
-
 function onRender() {
-    connection.trigger('ready');
     connection.trigger('requestTokens');
-    connection.trigger('requestEndpoints');
-    connection.trigger('requestCulture');
-    connection.trigger('requestInteractionDefaults');
     connection.trigger('requestInteraction');
-    // testSoapRequest();
-
 }
 
 function initialize(data) {
@@ -48,8 +35,8 @@ function initialize(data) {
     try {
         if (inArguments.length > 0) {
             var values = inArguments[inArguments.length - 1];
-            // $("textarea#message").val(values.message);
-            // $("input#phoneNumber").val(values.phoneNumber);
+            $("textarea#message-template-input").val(values.message);
+            selectedPhoneField = values.phoneNumber;
         }
     } catch (error) {
         console.error(error);
@@ -60,9 +47,8 @@ function initialize(data) {
 function save() {
     try {
         var formData = {};
-
-        formData.message = '$("textarea#message").val()';
-        formData.phoneNumber = '$("input#phoneNumber").val()';
+        formData.message = $("textarea#message-template-input").val();
+        formData.phoneNumber = document.getElementById("phone-parameter").val();
         payload['arguments'].execute.inArguments.push(formData);
         payload.name = 'asdfersde';
         payload['metaData'].isConfigured = true;
@@ -75,23 +61,13 @@ function save() {
 
 
 function requestedTokens(data) {
-    console.log('*** requestedTokens ' + JSON.stringify(data));
-}
-
-function requestedEndpoints(data) {
-    console.log('*** requestedEndpoints ' + JSON.stringify(data));
-}
-
-function requestedCulture(data) {
-    console.log('*** requestedCulture ' + JSON.stringify(data));
-}
-
-function requestedInteractionDefaults(data) {
-    console.log('*** requestedInteractionDefaults ' + JSON.stringify(data));
+    token = data.fuel2token;
+    loadData()
 }
 
 function requestedInteraction(data) {
-    console.log('*** requestedInteraction ' + JSON.stringify(data));
+    eventDefinitionId = data.triggers[0].metaData.eventDefinitionId;
+    loadData();
 }
 
 function sendTestSMS(){
@@ -99,9 +75,50 @@ function sendTestSMS(){
     xhr.open("POST", "/testSend");
     xhr.setRequestHeader("Accept", "application/json");
     xhr.setRequestHeader("Content-Type", "application/json");
+    console.log("sdsd");
+    console.log($("input#test-msisdn-input").val());
+
     let requestPayload = {
-        phoneNumber: 'phone',
-        message:'message'
+        phoneNumber: $("input#test-msisdn-input").val(),
+        message: $("textarea#message-template-input").val()
     };
     xhr.send(JSON.stringify(requestPayload));
+}
+
+function loadData(){
+    if (token && eventDefinitionId){
+        getDataExtentionsQuery = getDataExtentionsQuery.replace('@token',token).replace('@id',eventDefinitionId)
+        loadDataExtention();
+    }
+}
+
+function loadDataExtention(){
+    var serverEvents = new EventSource(getDataExtentionsQuery);
+    serverEvents.onmessage = function (event){
+        console.log(event.data);
+        fillFieldsData(event.data);
+    };
+}
+
+function fillFieldsData(data){
+    let data = [
+        { name: 'Date', type: 'Phone' },
+        { name: 'Value', type: 'Decimal' },
+        { name: 'Tansaction Id', type: 'Text' },
+        { name: 'Subscriber', type: 'Text' }
+      ];
+    data.forEach(field => {
+        if (field.type === 'Phone'){
+            let elemSelect = document.createElement('option');
+            elemSelect.value = field.name;
+            elemSelect.innerText = field.name;
+            elemSelect.setAttribute("value", field.name);
+            elemSelect.setAttribute("id", field.name);
+            document.getElementById("phone-parameter").appendChild(elemSelect);
+        }
+        let elemLi = document.createElement('li');
+        elemLi.innerText = '%%' + field.name + '%%';
+        document.getElementById("placeholder-list").appendChild(elemLi);
+    })
+    document.getElementById("phone-parameter").value = selectedPhoneField;
 }

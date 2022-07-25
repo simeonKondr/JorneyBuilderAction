@@ -14,55 +14,55 @@
         #step1 {
             display: block;
         }
-        .ib-custom-activity {
+        .custom-activity {
             font-family: "Salesforce Sans", Arial, sans-serif;
         }
-        .ib-text-field {
+        .text-field {
             margin-bottom: 15px;
         }
-        .ib-text-field label,select {
+        .text-field label,select {
             display: inline-block;
         }
-        .ib-text-field label {
+        .text-field label {
             line-height: 2.5rem;
         }
-        .ib-text-field textarea,input {
+        .text-field textarea,input {
             display: block;
         }
-        .ib-placeholder-list {
+        .placeholder-list {
             color: gray;
         }
-        .ib-input-form {
+        .input-form {
             display: inline-block;
         }
-        #ib-sender-parameter-wrapper {
+        #sender-parameter-wrapper {
             display: inline-block;
         }
-        #ib-send-test-sms-result-wrapper {
+        #send-test-sms-result-wrapper {
             margin-top: 10px;
         }
-        #ib-counters-wrapper {
+        #counters-wrapper {
             display: inline-block;
             float: right;
             line-height: 2.5rem;
             text-align: right;
         }
-        #ib-test-msisdn-input {
+        #test-msisdn-input {
             display: inline-block;
             margin-left: 10px;
         }
-        #ib-send-test-sms-form {
+        #send-test-sms-form {
             display: inline-block;
             float: right;
             text-align: center;
         }
-        #ib-send-test-sms-form fieldset {
+        #send-test-sms-form fieldset {
             padding-top: 15px;
         }
-        #ib-send-test-sms-button {
+        #send-test-sms-button {
             margin-top: 15px;
         }
-        #ib-data-extension-warning {
+        #data-extension-warning {
             padding: 20px;
             margin-bottom: 20px;
             background-color: darksalmon;
@@ -71,61 +71,57 @@
         }
     </style>
 </head>
-<body class="ib-custom-activity">
+<body class="custom-activity">
     <div id="step1" class="step">
-
-        <div id="ib-data-extension-warning"><span>Data extension not detected. Please configure the data extension before configuring Infobip's activity.</span></div>
-
-        <form id="ib-send-test-sms-form">
+        <div id="data-extension-warning"><span>Data extension not detected. Please configure the data extension before configuring Infobip's activity.</span></div>
+        <form id="send-test-sms-form">
             <fieldset>
                 <legend>Test SMS message</legend>
-                <label for="ib-test-msisdn-input">Destination</label>
-                <input id="ib-test-msisdn-input" type="text" size="20" placeholder="Enter phone number"><br>
-                <button id="ib-send-test-sms-button">Send test message</button><br>
-                <div id="ib-send-test-sms-result-wrapper">
-                    <span id="ib-send-test-sms-result"></span>
+                <label for="test-msisdn-input">Destination</label>
+                <input id="test-msisdn-input" type="text" size="20" placeholder="Enter phone number"><br>
+                <button id="send-test-sms-button" onclick="sendTestSMS()">Send test message</button><br>
+                <div id="send-test-sms-result-wrapper">
+                    <span id="send-test-sms-result"></span>
                 </div>
             </fieldset>
         </form>
 
-        <div class="ib-input-form">
+        <div class="input-form">
 
-            <div class="ib-form-header">
-                <div class="ib-text-field">
-                    <label for="ib-activity-name-input">Activity name</label>
-                    <input id="ib-activity-name-input" type="text" size="80" placeholder="Activity name" disabled="disabled">
+            <div class="form-header">
+                <div class="text-field">
+                    <label for="activity-name-input">Activity name</label>
+                    <input id="activity-name-input" type="text" size="80" placeholder="Activity name" disabled="disabled">
                 </div>
             </div>
 
-            <div class="ib-form-body">
-                <div class="ib-text-field">
-                    <label for="ib-message-template-input">Type in your message template</label>
-                    <div id="ib-counters-wrapper">
-                        <span id="ib-message-counter"></span>
+            <div class="form-body">
+                <div class="text-field">
+                    <label for="message-template-input">Type in your message template</label>
+                    <div id="counters-wrapper">
+                        <span id="message-counter"></span>
                         &nbsp;&#47;&nbsp;
-                        <span id="ib-chars-left-counter">160</span>
+                        <span id="chars-left-counter">160</span>
                     </div>
                     <textarea
-                        id="ib-message-template-input"
+                        id="message-template-input"
                         name="message-template"
                         rows="10"
                         cols="80"
                     ></textarea>
                 </div>
 
-                <div class="ib-placeholder-list">
+                <div class="placeholder-list">
                     <span>Supported placeholders:</span>
-                    <ul id="ib-placeholder-list"></ul>
+                    <ul id="placeholder-list"></ul>
                 </div>
 
-                <div class="ib-text-field">
-                    <label for="ib-phone-parameter">Phone number data extension parameter</label>
-                    <select id="ib-phone-parameter"></select>
+                <div class="text-field">
+                    <label for="phone-parameter">Phone number data extension parameter</label>
+                    <select id="phone-parameter"></select>
                 </div>
-
             </div>
         </div>
-
     </div>
      <script src="jquery.js"></script>
      <script src="postmonger.js"></script>
