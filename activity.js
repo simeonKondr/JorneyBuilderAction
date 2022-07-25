@@ -6,6 +6,8 @@ var token, eventDefinitionId, eventDefinitionKey;
 var serverEvents;
 var mergeFieldPattern = "{{Event.@eventDefinition.@field}}"
 var dataExtentionLoaded = false;
+var fieldsArray = [];
+var fieldsMergeArray = [];
 $(window).ready(onRender);
 
 connection.on('initActivity', initialize);
@@ -43,7 +45,13 @@ function initialize(data) {
 
 function save() {
     var formData = {};
-    formData.message = mergeFieldPattern.replace('@field', $("textarea#message-template-input").val().replaceAll("%",''));
+    let message = $("textarea#message-template-input").val();
+    fieldsArray.forEach((element, index) => {
+        if (message.includes(element)){
+            message = message.replaceAll(element, fieldsMergeArray[index]);
+        }
+    });
+    formData.message = message;
     formData.phoneNumber = document.getElementById("phone-parameter").value;
     payload['arguments'].execute.inArguments = [];
     payload['arguments'].execute.inArguments.push(formData);
@@ -116,6 +124,13 @@ function fillFieldsData(data){
         let elemLi = document.createElement('li');
         elemLi.innerText = '%%' + field.name + '%%';
         selectElem.appendChild(elemLi);
+        fieldsArray.push('%%' + field.name + '%%');
+        fieldsMergeArray.push(mergeFieldPattern.replace('@field', field.name));
     })
     phoneElem.value = selectedPhoneField;
+    fieldsMergeArray.forEach((element, index) => {
+        if (message.includes(element)){
+            message = message.replaceAll(element, fieldsArray[index]);
+        }
+    });
 }
