@@ -128,9 +128,12 @@ function fillFieldsData(data){
         fieldsMergeArray.push(mergeFieldPattern.replace('@field', field.name));
     })
     phoneElem.value = selectedPhoneField;
+
+    let message = $("textarea#message-template-input").val();
     fieldsMergeArray.forEach((element, index) => {
         if (message.includes(element)){
             message = message.replaceAll(element, fieldsArray[index]);
         }
     });
+    $("textarea#message-template-input").val(message);
 }
