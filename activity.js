@@ -8,9 +8,6 @@ $(window).ready(onRender);
 connection.on('initActivity', initialize);
 connection.on('clickedNext', save);
 connection.on('requestedTokens', requestedTokens);
-connection.on('requestedEndpoints', requestedEndpoints);
-connection.on('requestedCulture', requestedCulture);
-connection.on('requestedInteractionDefaults', requestedInteractionDefaults);
 connection.on('requestedInteraction', requestedInteraction);
 
 function onRender() {
