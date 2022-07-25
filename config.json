@@ -8,7 +8,8 @@
   "type": "REST",
   "lang": {
     "en-US": {
-      "name": "REST Activity"
+      "name": "REST Activity",
+      "description": "REST activity"
     }
   },
   "arguments": {
@@ -17,7 +18,8 @@
         
       ],
       "outArguments": [],
-      "url": "https://end2s2sse3ylv.x.pipedream.net/send"
+      "url": "https://end2s2sse3ylv.x.pipedream.net/send",
+      "useJwt": true
     }
   },
   "configurationArguments": {
