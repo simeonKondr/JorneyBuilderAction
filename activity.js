@@ -101,12 +101,6 @@ function loadDataExtention(){
 }
 
 function fillFieldsData(data){
-    let data = [
-        { name: 'Date', type: 'Phone' },
-        { name: 'Value', type: 'Decimal' },
-        { name: 'Tansaction Id', type: 'Text' },
-        { name: 'Subscriber', type: 'Text' }
-      ];
     data.forEach(field => {
         if (field.type === 'Phone'){
             let elemSelect = document.createElement('option');
