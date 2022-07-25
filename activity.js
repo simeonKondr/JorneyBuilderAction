@@ -94,8 +94,9 @@ function loadData(){
         Http.open("GET", getDataExtentionsQuery);
         Http.send();
         Http.onreadystatechange = (e) => {
-          console.log(Http.responseText);
-          fillFieldsData(JSON.parse(Http.responseText));
+            if (Http.responseText){
+                fillFieldsData(JSON.parse(Http.responseText));
+            }
         }
     }
 }
