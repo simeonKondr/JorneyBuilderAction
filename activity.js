@@ -4,6 +4,7 @@ var getDataExtentionsQuery = '/events?token=@token&id=@id';
 var selectedPhoneField;
 var token, eventDefinitionId;
 var serverEvents;
+var dataExtentionLoaded = false;
 $(window).ready(onRender);
 
 connection.on('initActivity', initialize);
@@ -35,16 +36,14 @@ function initialize(data) {
             var values = inArguments[inArguments.length - 1];
             $("textarea#message-template-input").val(values.message);
             selectedPhoneField = values.phoneNumber;
-        }
-        console.error(error);
-    
+        }    
     console.log("Data", data);
 }
 
 function save() {
     var formData = {};
     formData.message = $("textarea#message-template-input").val();
-    formData.phoneNumber = document.getElementById("phone-parameter").val();
+    formData.phoneNumber = document.getElementById("phone-parameter").val;
     payload['arguments'].execute.inArguments.push(formData);
     payload.name = 'asdfersde';
     payload['metaData'].isConfigured = true;
@@ -55,12 +54,12 @@ function save() {
 
 function requestedTokens(data) {
     token = data.fuel2token;
-    console.log('requestedTokens');
+    loadData()
 }
 
 function requestedInteraction(data) {
     eventDefinitionId = data.triggers[0].metaData.eventDefinitionId;
-    console.log('interaction');
+    loadData()
 }
 
 function sendTestSMS(){
@@ -68,9 +67,7 @@ function sendTestSMS(){
     xhr.open("POST", "/testSend");
     xhr.setRequestHeader("Accept", "application/json");
     xhr.setRequestHeader("Content-Type", "application/json");
-    console.log("sdsd");
     console.log($("input#test-msisdn-input").val());
-
     let requestPayload = {
         phoneNumber: $("input#test-msisdn-input").val(),
         message: $("textarea#message-template-input").val()
@@ -81,7 +78,7 @@ function sendTestSMS(){
 function loadData(){
     console.log(token);
     console.log(eventDefinitionId);
-    if (token && eventDefinitionId){
+    if (token && eventDefinitionId && !dataExtentionLoaded){
         console.log(token);
         console.log(eventDefinitionId);
         getDataExtentionsQuery = getDataExtentionsQuery.replace('@token',token).replace('@id',eventDefinitionId)
@@ -92,6 +89,7 @@ function loadData(){
             if (Http.responseText){
                 console.log(Http.responseText);
                 fillFieldsData(JSON.parse(Http.responseText));
+                dataExtentionLoaded = true;
                 Http.close();
             }
         }
