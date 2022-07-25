@@ -102,7 +102,7 @@ function fillFieldsData(data){
     phoneElem.innerHTML = '';
     selectElem.innerHTML = '';
     data.forEach(field => {
-        if (field.type !== 'Phone'){
+        if (field.type != 'Phone'){
             let elemSelect = document.createElement('option');
             elemSelect.value = '%%' + field.name + '%%';
             elemSelect.innerText = field.name;
