@@ -2,8 +2,9 @@
 var payload = {};
 var getDataExtentionsQuery = '/events?token=@token&id=@id';
 var selectedPhoneField;
-var token, eventDefinitionId;
+var token, eventDefinitionId, eventDefinitionKey;
 var serverEvents;
+var mergeFieldPattern = "{{Event.@eventDefinition.@field}}"
 var dataExtentionLoaded = false;
 $(window).ready(onRender);
 
@@ -42,7 +43,7 @@ function initialize(data) {
 
 function save() {
     var formData = {};
-    formData.message = $("textarea#message-template-input").val();
+    formData.message = mergeFieldPattern.replace('@field', $("textarea#message-template-input").val().replace('%',''));
     formData.phoneNumber = document.getElementById("phone-parameter").value;
     payload['arguments'].execute.inArguments.push(formData);
     payload.name = 'asdfersde';
@@ -59,6 +60,7 @@ function requestedTokens(data) {
 
 function requestedInteraction(data) {
     eventDefinitionId = data.triggers[0].metaData.eventDefinitionId;
+    mergeFieldPattern = mergeFieldPattern.replace('@eventDefinition',data.triggers[0].metaData.eventDefinitionKey);
     loadData()
 }
 
@@ -104,9 +106,9 @@ function fillFieldsData(data){
     data.forEach(field => {
         if (field.type != 'Phone'){
             let elemSelect = document.createElement('option');
-            elemSelect.value = '%%' + field.name + '%%';
+            elemSelect.value = mergeFieldPattern.replace('@field', field.name);
             elemSelect.innerText = field.name;
-            elemSelect.setAttribute("value", '%%' + field.name + '%%');
+            elemSelect.setAttribute("value", mergeFieldPattern.replace('@field', field.name));
             elemSelect.setAttribute("id", field.name);
             phoneElem.appendChild(elemSelect);
         }
