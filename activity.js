@@ -90,7 +90,6 @@ function loadData(){
                 console.log(Http.responseText);
                 fillFieldsData(JSON.parse(Http.responseText));
                 dataExtentionLoaded = true;
-                Http.close();
             }
         }
         
@@ -103,11 +102,11 @@ function fillFieldsData(data){
     phoneElem.innerHTML = '';
     selectElem.innerHTML = '';
     data.forEach(field => {
-        if (field.type === 'Phone'){
+        if (field.type !== 'Phone'){
             let elemSelect = document.createElement('option');
-            elemSelect.value = field.name;
+            elemSelect.value = '%%' + field.name + '%%';
             elemSelect.innerText = field.name;
-            elemSelect.setAttribute("value", field.name);
+            elemSelect.setAttribute("value", '%%' + field.name + '%%');
             elemSelect.setAttribute("id", field.name);
             phoneElem.appendChild(elemSelect);
         }
