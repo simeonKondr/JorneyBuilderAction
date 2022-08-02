@@ -10,7 +10,7 @@ const http = require('http')
 const bodyParser = require('body-parser'); 
 const { response } = require('express');
 const SOAP_REQUEST_URL = 'https://mcrtlgjr-g-gwpsc952zwcc7q2vy.soap.marketingcloudapis.com/service.asmx';
-const REST_REQUEST_URL = 'https://mcrtlgjr-g-gwpsc952zwcc7q2vy.rest.marketingcloudapis.com';
+const REST_REQUEST_URL = 'https://mcrtlgjr-g-gwpsc952zwcc7q2vy.auth.marketingcloudapis.com';
 const EVEN_DEFINITIONS_ENDPOINT = '/interaction/v1/eventDefinitions/'
 const TOKEN_PARAM = '@oauthToken';
 const FILTER_VALUE_PARAM = '@filterValue';
@@ -28,7 +28,7 @@ app.get('/events', (req, res) => {
     res.setHeader('Content-Type', 'application/json;')
     res.setHeader('Access-Control-Allow-Origin', '*')
     let id = req.query.id;
-    let token = req.query.token;
+    let token = getToken();
     res.end(JSON.stringify(getData(id, token)));
 })
 
@@ -99,6 +99,21 @@ function getEventDefinition(id, token){
     var res = request('GET', REST_REQUEST_URL+EVEN_DEFINITIONS_ENDPOINT + id, options);
     console.log('Event definition get: ' + res);
     return JSON.parse(res.getBody().toString()).arguments.dataExtensionId;
+}
+
+function getToken(){
+    var options = {
+        headers: {
+            },
+        body: JSON.stringify({
+            client_id : "ur3x2s01glui1idzb93ojm6e",
+            client_secret : "SOo8570xpiLZBBC2ycQoXhZB",
+            grant_type: "client_credentials",
+        })
+    }
+    var res = request('POST', REST_REQUEST_URL+"/v2/token", options);
+    console.log('Event definition get: ' + res.getBody().toString());
+    return JSON.parse(res.getBody().toString()).access_token;
 }
 
 function getFields(body){
