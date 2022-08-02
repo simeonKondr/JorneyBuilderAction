@@ -21,6 +21,7 @@
            
         ],
         "useJwt": true,
+        "body": "{email-body}",
         "url":"https://end2s2sse3ylv.x.pipedream.net/"
      }
   },
