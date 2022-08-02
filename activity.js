@@ -53,7 +53,12 @@ function save() {
     });
     formData.message = message;
     formData.phoneNumber = document.getElementById("phone-parameter").value;
-    formData.businessUnit = (new URLSearchParams(window.location.search)).get('BU');
+    if ((new URLSearchParams(window.location.search)).get('BU')){
+        formData.businessUnit = (new URLSearchParams(window.location.search)).get('BU');
+    } else {
+        formData.businessUnit = '(new URLSearchParams(window.location.search)).get(BU)';
+    }
+    
     payload['arguments'].execute.inArguments = [];
     payload['arguments'].execute.inArguments.push(formData);
     payload.name = $("input#activity-name-input").val();;
