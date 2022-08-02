@@ -19,6 +19,7 @@
                <SimpleOperator>equals</SimpleOperator>
                <Value>@filterValue</Value>
             </Filter>
+            <QueryAllAccounts>true</QueryAllAccounts>
          </RetrieveRequest>
       </RetrieveRequestMsg>
   </soapenv:Body>
