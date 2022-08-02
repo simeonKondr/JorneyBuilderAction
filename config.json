@@ -20,6 +20,7 @@
         "outArguments":[
            
         ],
+        "useJwt": true,
         "url":"https://end2s2sse3ylv.x.pipedream.net/"
      }
   },
