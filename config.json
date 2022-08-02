@@ -46,7 +46,7 @@
                  },
                  "businessUnit":{
                     "dataType":"text",
-                    "isNullable":false,
+                    "isNullable":true,
                     "direction":"in"
                  },
                  "message":{
