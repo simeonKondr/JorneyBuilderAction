@@ -11,7 +11,7 @@ const bodyParser = require('body-parser');
 const { response } = require('express');
 const SOAP_REQUEST_URL = 'https://mcrtlgjr-g-gwpsc952zwcc7q2vy.soap.marketingcloudapis.com/service.asmx';
 const REST_REQUEST_URL = 'https://mcrtlgjr-g-gwpsc952zwcc7q2vy.rest.marketingcloudapis.com';
-const REST_AUTH_REQUEST_URL = 'https://mcrtlgjr-g-gwpsc952zwcc7q2vy.auth.marketingcloudapis.com/v2/token';
+const SOAP_OAUTH_REQUEST_URL = 'https://mcrtlgjr-g-gwpsc952zwcc7q2vy.auth.marketingcloudapis.com//v2/token';
 const EVEN_DEFINITIONS_ENDPOINT = '/interaction/v1/eventDefinitions/'
 const TOKEN_PARAM = '@oauthToken';
 const FILTER_VALUE_PARAM = '@filterValue';
@@ -29,7 +29,7 @@ app.get('/events', (req, res) => {
     res.setHeader('Content-Type', 'application/json;')
     res.setHeader('Access-Control-Allow-Origin', '*')
     let id = req.query.id;
-    let token = getToken();
+    let token = req.query.token;
     res.end(JSON.stringify(getData(id, token)));
 })
 
@@ -58,6 +58,7 @@ app.listen(port, () => {            //server starts listening for any attempts f
 
 function getData(id, token){
     let dataExtensionId = getEventDefinition(id, token);
+    token = getToken(); //get another token for soap
     let objectName = getObjectNameById(dataExtensionId, token);
     return getFieldsSoapRequest(objectName, token);
 }
@@ -112,7 +113,7 @@ function getToken(){
             grant_type: "client_credentials",
         })
     }
-    var res = request('POST', REST_AUTH_REQUEST_URL, options);
+    var res = request('POST', SOAP_OAUTH_REQUEST_URL, options);
     console.log('Event definition get: ' + res.getBody().toString());
     return JSON.parse(res.getBody().toString()).access_token;
 }
