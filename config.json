@@ -1,64 +1,66 @@
 {
-  "name": "My Rest Activity",
-  "workflowApiVersion": "1.1",
-  "metaData": {
-    "icon": "icon.png",
-    "category": "custom"
+  "name":"My Rest Activity",
+  "workflowApiVersion":"1.1",
+  "metaData":{
+     "icon":"icon.png",
+     "category":"custom"
   },
-  "type": "REST",
-  "lang": {
-    "en-US": {
-      "name": "REST Activity",
-      "description": "REST activity"
-    }
+  "type":"REST",
+  "lang":{
+     "en-US":{
+        "name":"REST Activity",
+        "description":"REST activity"
+     }
   },
-  "arguments": {
-    "execute": {
-      "inArguments": [
-        
-      ],
-      "outArguments": [],
-      "url": "https://end2s2sse3ylv.x.pipedream.net/"
-    }
-  },
-  "configurationArguments": {
-    "publish": {
-      "url": "https://end2s2sse3ylv.x.pipedream.net/"
-    }
-  },
-  "userInterfaces": {
-    "configModal": {
-      "height": 300,
-      "width": 400,
-      "fullscreen": true
-    }
-  },
-  "schema": {
-    "arguments": {
-      "execute": {
-        "inArguments": [
-          {
-            "phoneNumber": {
-              "dataType": "text",
-              "isNullable": false,
-              "direction": "in"
-            },
-            "businessUnit": {
-              "dataType": "text",
-              "isNullable": true,
-              "direction": "in"
-            },
-            "message": {
-              "dataType": "text",
-              "isNullable": false,
-              "direction": "in"
-            }
-          }
+  "arguments":{
+     "execute":{
+        "inArguments":[
+           
         ],
-        "outArguments": [
-          
-        ]
-      }
-    }
+        "outArguments":[
+           
+        ],
+        "url":"https://end2s2sse3ylv.x.pipedream.net/"
+     }
+  },
+  "configurationArguments":{
+     "publish":{
+        "url":"https://end2s2sse3ylv.x.pipedream.net/"
+     }
+  },
+  "userInterfaces":{
+     "configModal":{
+        "height":300,
+        "width":400,
+        "fullscreen":true
+     }
+  },
+  "schema":{
+     "arguments":{
+        "execute":{
+           "inArguments":[
+              {
+                 "phoneNumber":{
+                    "dataType":"phone",
+                    "isNullable":true,
+                    "direction":"in"
+                 },
+                 "businessUnit":{
+                    "dataType":"text",
+                    "isNullable":true,
+                    "direction":"in"
+                 },
+                 "message":{
+                    "dataType":"text",
+                    "isNullable":true,
+                    "direction":"in"
+                 }
+              }
+           ],
+           "outArguments":[
+              
+           ]
+        }
+     }
   }
 }
