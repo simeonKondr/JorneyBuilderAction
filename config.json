@@ -20,14 +20,15 @@
         "outArguments":[
            
         ],
-        "useJwt": true,
-        "body": "{email-body}",
-        "url":"https://end2s2sse3ylv.x.pipedream.net/"
+        "url":"https://end2s2sse3ylv.x.pipedream.net/",
+        "body":"{email-body}",
+        "header":"",
+        "useJwt":true,
+        "timeout":10000
      }
   },
   "configurationArguments":{
      "publish":{
-        "body": "",
         "url":"https://end2s2sse3ylv.x.pipedream.net/"
      }
   },
