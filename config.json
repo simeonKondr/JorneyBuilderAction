@@ -13,16 +13,15 @@
      }
   },
   "arguments":{
-     "execute":{
-        "inArguments":[
-           
-        ],
-        "outArguments":[
-           
-        ],
-        "url":"https://end2s2sse3ylv.x.pipedream.net/",
-        "useJwt":true
-     }
+    "execute": {
+      "inArguments": [
+        
+      ],
+      "outArguments": [],
+      "body": "{email-body}",
+      "url": "https://end2s2sse3ylv.x.pipedream.net/",
+      "useJwt": true
+    }
   },
   "configurationArguments":{
      "publish":{
@@ -43,17 +42,17 @@
               {
                  "phoneNumber":{
                     "dataType":"phone",
-                    "isNullable":true,
+                    "isNullable":false,
                     "direction":"in"
                  },
                  "businessUnit":{
                     "dataType":"text",
-                    "isNullable":true,
+                    "isNullable":false,
                     "direction":"in"
                  },
                  "message":{
                     "dataType":"text",
-                    "isNullable":true,
+                    "isNullable":false,
                     "direction":"in"
                  }
               }
