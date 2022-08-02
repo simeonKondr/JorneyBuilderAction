@@ -18,9 +18,7 @@
         
       ],
       "outArguments": [],
-      "body": "{email-body}",
-      "url": "https://end2s2sse3ylv.x.pipedream.net/",
-      "useJwt": true
+      "url": "https://end2s2sse3ylv.x.pipedream.net/"
     }
   },
   "configurationArguments":{
