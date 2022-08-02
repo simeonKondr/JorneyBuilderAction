@@ -45,6 +45,11 @@
               "isNullable": false,
               "direction": "in"
             },
+            "businessUnit": {
+              "dataType": "text",
+              "isNullable": false,
+              "direction": "in"
+            },
             "message": {
               "dataType": "text",
               "isNullable": false,

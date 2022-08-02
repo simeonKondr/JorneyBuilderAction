@@ -53,6 +53,7 @@ function save() {
     });
     formData.message = message;
     formData.phoneNumber = document.getElementById("phone-parameter").value;
+    formData.businessUnit = (new URLSearchParams(window.location.search)).get('BU');
     payload['arguments'].execute.inArguments = [];
     payload['arguments'].execute.inArguments.push(formData);
     payload.name = $("input#activity-name-input").val();;
@@ -80,6 +81,7 @@ function sendTestSMS(){
     xhr.setRequestHeader("Content-Type", "application/json");
     console.log($("input#test-msisdn-input").val());
     let requestPayload = {
+        businessUnit: (new URLSearchParams(window.location.search)).get('BU'),
         phoneNumber: $("input#test-msisdn-input").val(),
         message: $("textarea#message-template-input").val()
     };
@@ -113,7 +115,7 @@ function fillFieldsData(data){
     phoneElem.innerHTML = '';
     selectElem.innerHTML = '';
     data.forEach(field => {
-        if (field.type != 'Phone'){
+        if (field.type === 'Phone'){
             let elemSelect = document.createElement('option');
             elemSelect.value = mergeFieldPattern.replace('@field', field.name);
             elemSelect.innerText = field.name;
