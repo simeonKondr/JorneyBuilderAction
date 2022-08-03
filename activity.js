@@ -87,6 +87,7 @@ function sendTestSMS(){
         message: $("textarea#message-template-input").val()
     };
     xhr.send(JSON.stringify(requestPayload));
+    alert('SMS sent');
 }
 
 function loadData(){
