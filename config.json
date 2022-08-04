@@ -19,7 +19,7 @@
       ],
       "outArguments": [],
       "useJwt": true,
-      "url": "https://secure.sendia.ai/Service/MtSaleforce"
+      "url": "https://secure.sendia.ai/Service/MtSaleforce/"
     }
   },
   "configurationArguments":{
