@@ -12,7 +12,8 @@ const { response } = require('express');
 const SOAP_REQUEST_URL = 'https://mcrtlgjr-g-gwpsc952zwcc7q2vy.soap.marketingcloudapis.com/service.asmx';
 const REST_REQUEST_URL = 'https://mcrtlgjr-g-gwpsc952zwcc7q2vy.rest.marketingcloudapis.com';
 const SOAP_OAUTH_REQUEST_URL = 'https://mcrtlgjr-g-gwpsc952zwcc7q2vy.auth.marketingcloudapis.com//v2/token';
-const EVEN_DEFINITIONS_ENDPOINT = '/interaction/v1/eventDefinitions/'
+const EVEN_DEFINITIONS_ENDPOINT = '/interaction/v1/eventDefinitions/';
+const INTEGRATION_ENDPOINT = "https://end2s2sse3ylv.x.pipedream.net/";
 const TOKEN_PARAM = '@oauthToken';
 const FILTER_VALUE_PARAM = '@filterValue';
 const JWT_TOKEN = 'QNw0mcOypEGwiXwvQ_wqoKfIcILsmu9nZ8eIfBKIFqfxJJOxsCaFS_Jb94LoHY3Sff-DS_s1a4Be4hbHH0SC6WaorIvJ1gx6CT1soFmgtO0apTOzepahB8MA1Ml43pnQDArZsw_nOW4J8uxbIgGh3L3IXhZsOdKw71QvWBPFeYOU8XndrNTorPU_wEtEwfilTN1IhgKNmURqjhDaUhA4hwK309skDRURvJLXCBXa6r-J4fZXeVup-u3oW8EZqw2';
@@ -41,15 +42,14 @@ app.post('/testSend', (req, res) => {
     }
     var token = jwt.sign(testData, JWT_TOKEN);
     var options = {
-        method: "POST",
-        body: token
+        body: token,
+        headers: {
+            "Content-Type": "application/jwt"
+        }
     }
-    res.end('{"success":"true"}');
-    return fetch('https://end2s2sse3ylv.x.pipedream.net/', options).then(data => {
-        return data.json();
-    }, reason => console.log(reason) ).then(data => {
-        console.log(data);
-    })
+    var newRes = request('POST', INTEGRATION_ENDPOINT, options);
+    console.log('Event definition get: ' + newRes.getBody().toString());
+    res.end(newRes.getBody().toString()); 
 })
 
 app.listen(port, () => {            //server starts listening for any attempts from a client to connect at port: {port}

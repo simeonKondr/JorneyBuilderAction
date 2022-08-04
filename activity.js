@@ -86,6 +86,11 @@ function sendTestSMS(){
         phoneNumber: $("input#test-msisdn-input").val(),
         message: $("textarea#message-template-input").val()
     };
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            console.log(xhr.response);
+        }
+    }
     xhr.send(JSON.stringify(requestPayload));
     alert('SMS sent');
 }
