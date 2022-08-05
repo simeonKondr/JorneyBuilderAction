@@ -53,8 +53,7 @@ function save() {
     });
     formData.message = message;
     formData.phoneNumber = document.getElementById("phone-parameter").value;
-    console.log('bu ' + payload.configurationArguments.applicationExtensionKey);
-    formData.businessUnit = (new URLSearchParams(window.location.search)).get('BU');
+    formData.businessUnit = payload.configurationArguments.applicationExtensionKey;
     // formData.businessUnit = "sd";
     payload['arguments'].execute.inArguments = [];
     payload['arguments'].execute.inArguments.push(formData);
