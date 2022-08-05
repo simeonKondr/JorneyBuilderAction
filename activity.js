@@ -82,7 +82,7 @@ function sendTestSMS(){
     xhr.setRequestHeader("Content-Type", "application/json");
     console.log($("input#test-msisdn-input").val());
     let requestPayload = {
-        businessUnit: (new URLSearchParams(window.location.search)).get('BU'),
+        businessUnit: payload.configurationArguments.applicationExtensionKey,
         phoneNumber: $("input#test-msisdn-input").val(),
         message: $("textarea#message-template-input").val()
     };
