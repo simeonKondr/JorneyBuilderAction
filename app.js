@@ -36,21 +36,21 @@ app.get('/events', (req, res) => {
 })
 
 app.post('/testSend', (req, res) => {
-    // testData = {
-    //     inArguments: [
-    //         req.body
-    //     ]
-    // }
-    // var token = jwt.sign(testData, JWT_TOKEN);
-    // var options = {
-    //     body: token,
-    //     headers: {
-    //         "Content-Type": "application/jwt"
-    //     }
-    // }
-    // var newRes = request('POST', INTEGRATION_ENDPOINT, options);
-    // console.log('Event definition get: ' + newRes.getBody().toString());
-    // res.end(newRes.getBody().toString()); 
+    testData = {
+        inArguments: [
+            req.body
+        ]
+    }
+    var token = jwt.sign(testData, JWT_TOKEN);
+    var options = {
+        body: token,
+        headers: {
+            "Content-Type": "application/jwt"
+        }
+    }
+    var newRes = request('POST', INTEGRATION_ENDPOINT, options);
+    console.log('Event definition get: ' + newRes.getBody().toString());
+    res.end(newRes.getBody().toString()); 
 })
 
 app.listen(port, () => {            //server starts listening for any attempts from a client to connect at port: {port}
