@@ -1,5 +1,5 @@
 {
-  "name":"My Rest Activity",
+  "name":"SMS DIGEVO",
   "workflowApiVersion":"1.1",
   "metaData":{
      "icon":"icon.png",
@@ -8,8 +8,8 @@
   "type":"REST",
   "lang":{
      "en-US":{
-        "name":"REST Activity",
-        "description":"REST activity"
+        "name":"SMS DIGEVO",
+        "description":"SMS DIGEVO"
      }
   },
   "arguments":{
